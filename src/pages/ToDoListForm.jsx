@@ -1,19 +1,25 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import ToDoItem from "../components/ToDoItem";
+import toDoReducer from "../utilities/toDoReducer.mjs";
+import ACTION from "../utilities/toDoReducerActions.mjs";
 
 export default function ToDoListForm() {
-  const [toDoList, setToDoList] = useState([]);
+  const [toDoList, dispatch] = useReducer(toDoReducer, []);
   const [formData, setFormData] = useState({
-    id: 0,
     title: "",
     completed: false,
   });
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    if (!formData.title.trim()) {
+      return;
+    }
     const newToDo = { ...formData, id: Date.now() };
-    setToDoList((prevList) => [newToDo, ...prevList]);
-    setFormData({ ...formData, title: "" });
+    dispatch({ type: ACTION.ADDTODO, payload: newToDo });
+
+    setFormData({ title: "", completed: false });
   }
 
   function handleChange(e) {
@@ -22,7 +28,6 @@ export default function ToDoListForm() {
       [e.target.name]: e.target.value,
     });
   }
-  //   console.log(formData.title);
 
   return (
     <>
@@ -38,7 +43,7 @@ export default function ToDoListForm() {
           />
         </label>
         <button type="submit">Add ToDo</button>
-        <ToDoItem setToDoList={setToDoList} toDoList={toDoList} />
+        <ToDoItem toDoList={toDoList} dispatch={dispatch} />
       </form>
     </>
   );
