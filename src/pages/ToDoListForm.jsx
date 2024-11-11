@@ -1,7 +1,7 @@
 import { useState, useReducer } from "react";
 import ToDoItem from "../components/ToDoItem";
 import toDoReducer from "../utilities/toDoReducer.mjs";
-import ACTION from "../utilities/toDoReducerActions.mjs";
+import ACTIONS from "../utilities/toDoReducerActions.mjs";
 
 export default function ToDoListForm() {
   const [toDoList, dispatch] = useReducer(toDoReducer, []);
@@ -17,7 +17,7 @@ export default function ToDoListForm() {
       return;
     }
     const newToDo = { ...formData, id: Date.now() };
-    dispatch({ type: ACTION.ADDTODO, payload: newToDo });
+    dispatch({ type: ACTIONS.ADD_TODO, payload: newToDo });
 
     setFormData({ title: "", completed: false });
   }

@@ -6,11 +6,10 @@ import ToDoListForm from './pages/ToDoListForm';
 
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <main>
-      <h2>Main App</h2>
+      <h2>To Do List</h2>
       <ToDoListForm />
       
     </main>

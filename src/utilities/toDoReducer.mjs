@@ -1,13 +1,22 @@
-import ACTION from "./toDoReducerActions.mjs";
+import ACTIONS from "./toDoReducerActions.mjs";
 
-export default function reducer(state, action) {
-  console.log(...state);
+export default function reducer(todos, action) {
+  // console.log(...state);
   switch (action.type) {
-    case ACTION.ADDTODO:
-      return [action.payload, ...state];
-    case ACTION.DELETETODO:
-      return state.filter((item) => item.id !== action.payload);
+    case ACTIONS.ADD_TODO:
+      return [action.payload, ...todos];
+    case ACTIONS.DELETE_TODO:
+      return todos.filter((item) => item.id !== action.payload);
+    case ACTIONS.EDIT_TODO:
+      return;
+    case ACTIONS.TOGGLE_TODO:
+      return todos.map((item) => {
+        if (item.id === action.payload) {
+          return { ...item, complete: !item.complete };
+        }
+        return item;
+      });
     default:
-      return state;
+      return todos;
   }
 }
