@@ -1,8 +1,6 @@
 import ACTIONS from "./toDoReducerActions.mjs";
 
 export default function reducer(todos, action) {
-  console.log(action);
-  console.log(todos);
   switch (action.type) {
     case ACTIONS.ADD_TODO:
       return [action.payload, ...todos];
@@ -16,10 +14,10 @@ export default function reducer(todos, action) {
           ? { ...item, title: action.payload.title }
           : item
       );
-    case ACTIONS.TOGGLE_TODO:
+    case ACTIONS.CHECKED_TODO:
       return todos.map((item) =>
-        item.id === action.payload
-          ? { ...item, completed: !item.completed }
+        item.id === action.payload.id
+          ? { ...item, completed: action.payload.completed }
           : item
       );
     default:

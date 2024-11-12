@@ -1,10 +1,11 @@
 import { useState, useReducer } from "react";
+import initialToDos from "../utilities/data.mjs";
 import ToDoItem from "../components/ToDoItem";
 import toDoReducer from "../utilities/toDoReducer.mjs";
 import ACTIONS from "../utilities/toDoReducerActions.mjs";
 
 export default function ToDoListForm() {
-  const [toDoList, dispatch] = useReducer(toDoReducer, []);
+  const [toDoList, dispatch] = useReducer(toDoReducer, initialToDos);
   const [formData, setFormData] = useState({
     title: "",
     completed: false,
@@ -41,7 +42,7 @@ export default function ToDoListForm() {
             value={formData.title}
             placeholder="Type Todo here..."
           />
-        </label>
+        </label>{" "}
         <button type="submit">Add ToDo</button>
         <ToDoItem toDoList={toDoList} dispatch={dispatch} />
       </form>

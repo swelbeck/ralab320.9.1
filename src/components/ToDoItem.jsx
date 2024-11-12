@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ACTIONS from "../utilities/toDoReducerActions.mjs";
 
 export default function ToDoItem({ toDoList, dispatch }) {
-    console.log(toDoList)
+  //   console.log(toDoList);
   const [isEditing, setIsEditing] = useState(null);
   const [editText, setEditText] = useState("");
 
@@ -10,8 +10,11 @@ export default function ToDoItem({ toDoList, dispatch }) {
     dispatch({ type: ACTIONS.DELETE_TODO, payload: id });
   }
 
-  function handleToggle(id) {
-    dispatch({ type: ACTIONS.TOGGLE_TODO, payload: id });
+  function handleChecked(e, id) {
+    dispatch({
+      type: ACTIONS.CHECKED_TODO,
+      payload: { id, completed: e.target.checked },
+    });
   }
 
   function handleEdit(id, currentTitle) {
@@ -28,23 +31,46 @@ export default function ToDoItem({ toDoList, dispatch }) {
     <ul>
       {toDoList.map((item) => (
         <li key={item.id}>
-          <button onClick={() => handleToggle(item.id)}>Toggle</button>
+          <label>
+            <input
+              onChange={(e) => handleChecked(e, item.id)}
+              type="checkbox"
+              checked={item.completed}
+            />{" "}
+          </label>
           {isEditing === item.id ? (
             <>
-              <input
-                type="text"
-                value={editText}
-                onChange={(e) => setEditText(e.target.value)}
-              />
-              <button onClick={() => handleSave(item.id)}>Save</button>
+              <label>
+                {" "}
+                <input
+                  type="text"
+                  value={editText}
+                  onChange={(e) => setEditText(e.target.value)}
+                />{" "}
+              </label>{" "}
+              <span className="button">
+                <button onClick={() => handleSave(item.id)} type="submit">
+                  Save
+                </button>
+              </span>
             </>
           ) : (
             <span style={{ color: item.completed ? "green" : "#000" }}>
               {item.title}
             </span>
           )}
-          <button onClick={() => handleEdit(item.id, item.title)}>Edit</button>
-          <button onClick={() => handleDelete(item.id)}>Delete</button>
+          {isEditing !== item.id && (
+            <>
+              <span className="button">{" "}
+                <button onClick={() => handleEdit(item.id, item.title)}>
+                  Edit
+                </button>
+              </span>{" "}
+              <span className="button">
+                <button onClick={() => handleDelete(item.id)}>Delete</button>
+              </span>
+            </>
+          )}
         </li>
       ))}
     </ul>
