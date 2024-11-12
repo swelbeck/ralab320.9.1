@@ -61,13 +61,19 @@ export default function ToDoItem({ toDoList, dispatch }) {
           )}
           {isEditing !== item.id && (
             <>
-              <span className="button">{" "}
+              <span className="button">
+                {" "}
                 <button onClick={() => handleEdit(item.id, item.title)}>
                   Edit
                 </button>
               </span>{" "}
               <span className="button">
-                <button onClick={() => handleDelete(item.id)}>Delete</button>
+                <button
+                  disabled={!item.completed}
+                  onClick={() => handleDelete(item.id)}
+                >
+                  Delete
+                </button>
               </span>
             </>
           )}
