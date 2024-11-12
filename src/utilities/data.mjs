@@ -49,56 +49,56 @@ const initialStateData = [
     title: "Find a new therapist",
     completed: true,
   },
-  {
-    id: 11,
-    title: "Apply for 5 jobs",
-    completed: true,
-  },
-  {
-    id: 12,
-    title: "Re-organize shelf",
-    completed: true,
-  },
-  {
-    id: 13,
-    title: "Cook dinner",
-    completed: false,
-  },
-  {
-    id: 14,
-    title: "Meal prep for upcoming week",
-    completed: true,
-  },
-  {
-    id: 15,
-    title: "Update portfolio",
-    completed: true,
-  },
-  {
-    id: 16,
-    title: "Organize email inbox",
-    completed: true,
-  },
-  {
-    id: 17,
-    title: "Go for a walk",
-    completed: true,
-  },
-  {
-    id: 18,
-    title: "Learn guitar",
-    completed: false,
-  },
-  {
-    id: 19,
-    title: "Practice keyboard",
-    completed: true,
-  },
-  {
-    id: 20,
-    title: "JS algorithm practice",
-    completed: true,
-  },
+  // {
+  //   id: 11,
+  //   title: "Apply for 5 jobs",
+  //   completed: true,
+  // },
+  // {
+  //   id: 12,
+  //   title: "Re-organize shelf",
+  //   completed: true,
+  // },
+  // {
+  //   id: 13,
+  //   title: "Cook dinner",
+  //   completed: false,
+  // },
+  // {
+  //   id: 14,
+  //   title: "Meal prep for upcoming week",
+  //   completed: true,
+  // },
+  // {
+  //   id: 15,
+  //   title: "Update portfolio",
+  //   completed: true,
+  // },
+  // {
+  //   id: 16,
+  //   title: "Organize email inbox",
+  //   completed: true,
+  // },
+  // {
+  //   id: 17,
+  //   title: "Go for a walk",
+  //   completed: true,
+  // },
+  // {
+  //   id: 18,
+  //   title: "Learn guitar",
+  //   completed: false,
+  // },
+  // {
+  //   id: 19,
+  //   title: "Practice keyboard",
+  //   completed: true,
+  // },
+  // {
+  //   id: 20,
+  //   title: "JS algorithm practice",
+  //   completed: true,
+  // },
 ];
 
 export default initialStateData;
