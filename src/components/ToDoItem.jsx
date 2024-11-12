@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import ACTIONS from "../utilities/toDoReducerActions.mjs";
 
 export default function ToDoItem({ toDoList, dispatch }) {
-  //   console.log(toDoList);
   const [isEditing, setIsEditing] = useState(null);
   const [editText, setEditText] = useState("");
 
@@ -22,7 +21,8 @@ export default function ToDoItem({ toDoList, dispatch }) {
     setEditText(currentTitle);
   }
 
-  function handleSave(id) {
+  function handleSave(e, id) {
+    e.preventDefault();
     dispatch({ type: ACTIONS.EDIT_TODO, payload: { id, title: editText } });
     setIsEditing(null);
   }
@@ -36,37 +36,39 @@ export default function ToDoItem({ toDoList, dispatch }) {
               onChange={(e) => handleChecked(e, item.id)}
               type="checkbox"
               checked={item.completed}
-            />{" "}
-          </label>
-          {isEditing === item.id ? (
-            <>
-              <label>
-                {" "}
-                <input
-                  type="text"
-                  value={editText}
-                  onChange={(e) => setEditText(e.target.value)}
-                />{" "}
-              </label>{" "}
-              <span className="button">
-                <button onClick={() => handleSave(item.id)} type="submit">
-                  Save
-                </button>
+            />
+            {isEditing === item.id ? (
+              <form onSubmit={(e) => handleSave(e, item.id)}>
+                <label>
+                  <input
+                    type="text"
+                    value={editText}
+                    onChange={(e) => setEditText(e.target.value)}
+                  />
+                </label>
+                <span className="button">
+                  <button type="submit">Save</button>
+                </span>
+              </form>
+            ) : (
+              <span
+                style={{
+                  color: item.completed ? "green" : "#000",
+                  textDecoration: item.completed ? "line-through" : "none",
+                }}
+              >
+                {item.title}
               </span>
-            </>
-          ) : (
-            <span style={{ color: item.completed ? "green" : "#000" }}>
-              {item.title}
-            </span>
-          )}
+            )}
+          </label>
+
           {isEditing !== item.id && (
             <>
               <span className="button">
-                {" "}
                 <button onClick={() => handleEdit(item.id, item.title)}>
                   Edit
                 </button>
-              </span>{" "}
+              </span>
               <span className="button">
                 <button
                   disabled={!item.completed}

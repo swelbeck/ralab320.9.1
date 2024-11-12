@@ -34,7 +34,6 @@ export default function ToDoListForm() {
     <>
       <form onSubmit={handleSubmit}>
         <label>
-          Todo:{" "}
           <input
             onChange={handleChange}
             type="text"
@@ -43,9 +42,11 @@ export default function ToDoListForm() {
             placeholder="Type Todo here..."
           />
         </label>{" "}
-        <button type="submit">Add ToDo</button>
-        <ToDoItem toDoList={toDoList} dispatch={dispatch} />
+        <button className="add-button" type="submit">
+          Add ToDo
+        </button>
       </form>
+      <ToDoItem toDoList={toDoList} dispatch={dispatch} />
     </>
   );
 }
